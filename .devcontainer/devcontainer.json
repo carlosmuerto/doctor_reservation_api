@@ -1,0 +1,41 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ruby-rails-postgres
+{
+	"name": "Ruby on Rails & Postgres",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// This can be used to network with other containers or the host.
+	"forwardPorts": [
+		3000
+	],
+	
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"rebornix.ruby",
+				"castwide.solargraph",
+				"LoranKloeze.ruby-rubocop-revived",
+				"GitHub.vscode-pull-request-github",
+				"wingrunr21.vscode-ruby",
+				"KoichiSasada.vscode-rdbg",
+				"ms-vscode.test-adapter-converter",
+				"hbenl.vscode-test-explorer",
+				"connorshea.vscode-ruby-test-adapter",
+				"ckolkman.vscode-postgres",
+				"eamodio.gitlens",
+				"aliariff.auto-add-brackets"
+			]
+		}
+	},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+
+	"postCreateCommand": "./.devcontainer/postCreateCommand.sh && echo 'DEVCONTAINER SETTED UP'"
+}
