@@ -24,6 +24,11 @@ default: &default
 development:
   <<: *default
   database: doctor_reservation_api_development
+  username: postgres
+  password: postgres
+
+  host: <%= ENV.fetch("DATABASE_HOST") { "localhost" } %>
+  port: <%= ENV.fetch("DATABASE_PORT") { 5432 } %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -58,6 +63,11 @@ development:
 test:
   <<: *default
   database: doctor_reservation_api_test
+  username: postgres
+  password: postgres
+
+  host: <%= ENV.fetch("DATABASE_HOST") { "localhost" } %>
+  port: <%= ENV.fetch("DATABASE_PORT") { 5432 } %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
