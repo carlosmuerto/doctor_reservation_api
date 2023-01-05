@@ -56,64 +56,64 @@ jobs:
       - name: Check node_modules existence
         run: |
           if [ -d "node_modules/" ]; then echo -e "\e[1;31mThe node_modules/ folder was pushed to the repo. Please remove it from the GitHub repository and try again."; echo -e "\e[1;32mYou can set up a .gitignore file with this folder included on it to prevent this from happening in the future." && exit 1; fi
-  # rspec:
-  #   name: RSpec
-  #   runs-on: ubuntu-22.04
-  #   strategy:
-  #     matrix:
-  #       database-password:
-  #         - postgres
-  #       database-user:
-  #         - postgres
-  #       database-host:
-  #         - localhost
-  #       database-port:
-  #         - 5432
+  rspec:
+    name: RSpec
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        database-password:
+          - postgres
+        database-user:
+          - postgres
+        database-host:
+          - localhost
+        database-port:
+          - 5432
 
-  #   services:
-  #     postgres:
-  #       image: postgres:latest
-  #       env:
-  #         POSTGRES_USER: ${{ matrix.database-user }}
-  #         POSTGRES_PASSWORD: ${{ matrix.database-password }}
-  #       ports:
-  #         - 5432:5432
-  #       # Set health checks to wait until postgres has started
-  #       options: --health-cmd pg_isready
-  #         --health-interval 10s
-  #         --health-timeout 5s
-  #         --health-retries 5
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: ${{ matrix.database-user }}
+          POSTGRES_PASSWORD: ${{ matrix.database-password }}
+        ports:
+          - 5432:5432
+        # Set health checks to wait until postgres has started
+        options: --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
-  #   steps:
-  #     - name: Check out Git Repository
-  #       uses: actions/checkout@v2
+    steps:
+      - name: Check out Git Repository
+        uses: actions/checkout@v2
 
-  #     - name: Set up Ruby, Bundler and Rails
-  #       uses: ruby/setup-ruby@v1
-  #       with:
-  #         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Set up Ruby, Bundler and Rails
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
-  #     - name: Set up Node
-  #       uses: actions/setup-node@v1
-  #       with:
-  #         node-version: "12.x"
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
 
-  #     - name: Install packages
-  #       run: |
-  #         yarn install --check-files+
-  #     - name: Install library for postgres
-  #       run: sudo apt-get install libpq-dev
+      - name: Install packages
+        run: |
+          yarn install --check-files+
+      - name: Install library for postgres
+        run: sudo apt-get install libpq-dev
 
-  #     - name: Install dependency
-  #       run: bundle install
+      - name: Install dependency
+        run: bundle install
 
-  #     - name: Setup test database
-  #       env:
-  #         DATABASE_USER: ${{ matrix.database-user }}
-  #         DATABASE_PASSWORD: ${{ matrix.database-password }}
-  #         DATABASE_HOST: ${{ matrix.database-host }}
-  #         DATABASE_PORT: ${{ matrix.database-port }}
-  #       run: bundle exec rails db:setup
+      - name: Setup test database
+        env:
+          DATABASE_USER: ${{ matrix.database-user }}
+          DATABASE_PASSWORD: ${{ matrix.database-password }}
+          DATABASE_HOST: ${{ matrix.database-host }}
+          DATABASE_PORT: ${{ matrix.database-port }}
+        run: bundle exec rails db:setup
 
-  #     - name: RSpec Report
-  #       run: bundle exec rspec --force-color --format documentation
+      - name: RSpec Report
+        run: bundle exec rspec --force-color --format documentation
