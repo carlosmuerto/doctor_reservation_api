@@ -4,10 +4,15 @@ Rails.application.routes.draw do
     sign_out: 'logout',
     registration: 'signup'
   },
+  controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }
+
+  get '/current_user', to: 'users#current'
   
-  get 'users/current'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  # root "articles#index"
+  root "users#current"
 end
