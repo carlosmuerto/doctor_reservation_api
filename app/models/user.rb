@@ -6,4 +6,17 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: self
+
+  def self.roles
+    %w[user admin].freeze
+  end
+
+  User.roles.each do |role_name|
+    define_method "#{role_name}?" do
+      role == role_name
+    end
+  end
+
+  validates :name, presence: true
+  validates :role, inclusion: { in: User.roles }
 end
