@@ -9,6 +9,9 @@ gem 'devise'
 # handle auth for api
 gem 'devise-jwt'
 
+# handle json reponse
+gem 'fast_jsonapi'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.4'
 
