@@ -32,6 +32,12 @@ components:
         message:
           type: string
           example: Signed up sucessfully.
+    ErrorResponses:
+      type: object
+      properties:
+        type: array
+        items:
+          type: string
 paths:
   "/signup":
     post:
@@ -62,16 +68,80 @@ paths:
                 user:
                   type: object
                   properties:
-                    email:
-                      type: string
-                    password:
-                      type: string
                     name:
                       type: string
+                      example: Swagger
+                    email:
+                      type: string
+                      example: swagger@rswag.com
+                    password:
+                      type: string
+                      example: swagger123
               required:
               - email
               - password
               - name
+  "/login":
+    post:
+      summary: login
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Authorization:
+              schema:
+                type: string
+              description: bearer token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    "$ref": "#/components/schemas/status"
+        '401':
+          description: Invalid Email or password.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Invalid Email or password.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      example: swagger@rswag.com
+                    password:
+                      type: string
+                      example: swagger123
+              required:
+              - email
+              - password
+  "/logout":
+    delete:
+      summary: logout
+      security:
+      - bearer_auth: []
+      responses:
+        '401':
+          description: Unauthorized
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/status"
   "/users/current":
     get:
       summary: Current user

@@ -2,17 +2,9 @@
 require 'swagger_helper'
 
 RSpec.describe 'users/registrations', type: :request do
-  let!(:test_user_email) do
-    'test_user_name@rspec.com'
-  end
-
-  let!(:test_user_password) do
-    'password'
-  end
-
-  let!(:test_user_name) do
-    'test_user_name'
-  end
+  let!(:user_name) { 'Swagger' }
+  let!(:user_email) { 'swagger@rswag.com' }
+  let!(:user_password) { 'swagger123' }
 
   path '/signup' do
     post 'signup' do
@@ -25,9 +17,9 @@ RSpec.describe 'users/registrations', type: :request do
           user: {
             type: :object,
             properties: {
-              email: { type: :string },
-              password: { type: :string },
-              name: { type: :string }
+              name: { type: :string, example: 'Swagger' },
+              email: { type: :string, example: 'swagger@rswag.com' },
+              password: { type: :string, example: 'swagger123' }
             }
           }
         },
@@ -40,7 +32,7 @@ RSpec.describe 'users/registrations', type: :request do
 
       response 200, 'OK' do
         header 'Authorization',
-               schema: :bearer,
+               schema: { type: :string },
                description: 'bearer token'
 
         schema type: :object, properties: {
@@ -51,9 +43,9 @@ RSpec.describe 'users/registrations', type: :request do
         let(:cretentials) do
           {
             user: {
-              email: test_user_email,
-              password: test_user_password,
-              name: test_user_name
+              name: user_name,
+              email: user_email,
+              password: user_password
             }
           }
         end

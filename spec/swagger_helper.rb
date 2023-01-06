@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/BlockLength
 require 'rails_helper'
 
 RSpec.configure do |config|
@@ -41,6 +42,13 @@ RSpec.configure do |config|
               code: { type: :integer, example: 200 },
               message: { type: :string, example: 'Signed up sucessfully.' }
             }
+          },
+          ErrorResponses: {
+            type: :object,
+            properties: {
+              type: :array,
+              items: { type: :string }
+            }
           }
         }
       }
@@ -53,3 +61,5 @@ RSpec.configure do |config|
   # Defaults to json. Accepts ':json' and ':yaml'.
   config.swagger_format = :yaml
 end
+
+# rubocop:enable Metrics/BlockLength
