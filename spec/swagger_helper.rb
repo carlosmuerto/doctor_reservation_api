@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 RSpec.configure do |config|
@@ -37,11 +35,11 @@ RSpec.configure do |config|
               role: { type: :string, example: 'user' }
             }
           },
-          ErrorResponse: {
+          status: {
             type: :object,
             properties: {
-              type: :array,
-              items: { type: :string }
+              code: { type: :integer, example: 200 },
+              message: { type: :string, example: 'Signed up sucessfully.' }
             }
           }
         }

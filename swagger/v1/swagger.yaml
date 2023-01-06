@@ -1,0 +1,88 @@
+---
+openapi: 3.0.1
+info:
+  title: DOCTOR RESERVATION API
+components:
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 2
+        name:
+          type: string
+          example: Scott Wells
+        email:
+          type: string
+          example: scott_wells@test.com
+        role:
+          type: string
+          example: user
+    status:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: Signed up sucessfully.
+paths:
+  "/signup":
+    post:
+      summary: signup
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Authorization:
+              schema:
+                type: string
+              description: bearer token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    "$ref": "#/components/schemas/status"
+                  data: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    name:
+                      type: string
+              required:
+              - email
+              - password
+              - name
+  "/users/current":
+    get:
+      summary: Current user
+      security:
+      - bearer_auth: []
+      responses:
+        '401':
+          description: Unauthorized
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/User"

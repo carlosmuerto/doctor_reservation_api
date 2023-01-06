@@ -2,14 +2,11 @@ require 'swagger_helper'
 
 RSpec.describe 'Users', type: :request do
   let!(:test_person) do
-    let_p = User.new(
+    User.create(
       name: 'rspec',
       email: 'rspec@rspec.com',
       password: '123rspec123'
     )
-    let_p.save
-
-    let_p
   end
 
   path '/users/current' do
