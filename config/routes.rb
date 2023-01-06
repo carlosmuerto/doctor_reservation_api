@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   },
   defaults: { format: :json }
 
-  get '/current_user', to: 'users#current'
+  get 'users/current', to: 'users#current'
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
