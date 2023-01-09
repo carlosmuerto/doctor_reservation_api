@@ -9,6 +9,9 @@ gem 'devise'
 # handle auth for api
 gem 'devise-jwt'
 
+# generate API Documentation from test
+gem 'rswag'
+
 # handle json reponse
 gem 'fast_jsonapi'
 
