@@ -22,7 +22,7 @@ seeded_doctor = Doctor.create(
 
 Appointment.create(
     user: seeded_user,
-    doctor: seeded_doctor
-    description: "seeded description"
-    datetime_of_appointment: 
+    doctor: seeded_doctor,
+    description: "seeded description",
+    datetime_of_appointment: 10.days.from_now
 )
