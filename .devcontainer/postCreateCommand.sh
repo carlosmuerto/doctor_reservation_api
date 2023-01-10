@@ -16,7 +16,12 @@ chsh -s $(which zsh)
 # # code ~/.zshrc
 # # plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 # # SH_THEME="powerlevel10k/powerlevel10k"
+
 # # export GPG_TTY=$(tty)
+
+# # code ~/.gnupg/gpg-agent.conf
+# # # default-cache-ttl 34560000
+# # # max-cache-ttl 34560000
 
 echo 'postCreateCommand.sh closed'
 exit 0

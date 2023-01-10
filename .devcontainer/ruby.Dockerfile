@@ -1,4 +1,4 @@
-FROM ruby:3.1.2-bullseye
+FROM ruby:3.1.3-bullseye
 
 # # install and postgre dependencies
 RUN apt-get update -qq
