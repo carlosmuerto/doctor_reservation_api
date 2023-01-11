@@ -1,4 +1,4 @@
-class Api::V1::UsersController < ApplicationController
+class UsersController < ApplicationController
   def index
     @users = User.all
     render json: @users
@@ -28,7 +28,7 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  def user_params
-    params.require(:user).permit(:name)
+  def current
+    render json: UserSerializer.new(current_user).serializable_hash[:data][:attributes], status: :ok
   end
 end
