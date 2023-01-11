@@ -3,6 +3,7 @@ class Appointment < ApplicationRecord
   belongs_to :doctor
 
   # validations
+
   # validate :datetime_of_appointment_cannot_be_in_the_past
   validates :description, presence: true, length: { in: 3..150 }
   validates :datetime_of_appointment,

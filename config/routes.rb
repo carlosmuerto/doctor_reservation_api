@@ -19,4 +19,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "users#current"
+
+  resources :appointments, only: [:index, :create, :show, :update, :destroy]
+  resources :doctors, only: [:index, :create, :show, :destroy]
+
+  
 end
