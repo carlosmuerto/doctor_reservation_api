@@ -129,6 +129,12 @@ Example command:
   rails s
 ```
 
+#### Swagger API DOC dir
+
+```
+[base URL]/api-docs
+```
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- AUTHORS -->
