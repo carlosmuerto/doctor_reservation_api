@@ -54,6 +54,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_456110) do
   add_foreign_key "appointments", "doctors"
   add_foreign_key "appointments", "users"
   add_foreign_key "doctors", "users"
-
 end
-

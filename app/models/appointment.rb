@@ -12,5 +12,4 @@ class Appointment < ApplicationRecord
               in: Date.today..Date.today + 5.years,
               message: 'Date should be in the future and no more that 5 years'
             }
-
 end
