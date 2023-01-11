@@ -48,22 +48,5 @@ RSpec.describe Doctor, type: :model do
       doctor = Doctor.new(photo: nil)
       expect(doctor).to_not be_valid
     end
-
-    # it 'is valid with a name between 3 and 50 characters' do
-    #  user = User.new(name: 'abc')
-    #  doctor = Doctor.new(name: 'abc')
-    #  expect(@doctor).to be_valid
-    # end
-
-    # it 'is valid with a specialization between 3 and 50 characters' do
-    #  user = User.new(name: 'abc')
-    #  doctor = Doctor.new(specialization: 'abc')
-    #  expect(@doctor).to be_valid
-    # end
-
-    # it 'is valid with a photo' do
-    # user = User.new(name: 'abc')
-    # expect(@doctor).to be_valid
-    # end
   end
 end

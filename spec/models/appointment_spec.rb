@@ -52,12 +52,6 @@ RSpec.describe Appointment, type: :model do
       expect(@appointment).to_not be_valid
     end
 
-    # it 'is valid with a description between 3 and 150 characters' do
-    # appointment = Appointment.new(user: @user, doctor: @doctor, description: 'abc')
-    # expect(@appointment).to be_valid
-    # end
-
-
     it 'is valid with a time_of_appointment format of HH:MM' do
       appointment = Appointment.new(user: @user, doctor: @doctor, description: 'abc',
                                     datetime_of_appointment: '2024, 1, 1, 10, 00')

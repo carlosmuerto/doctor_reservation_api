@@ -24,16 +24,6 @@ RSpec.describe User, type: :model do
       expect(user).to_not be_valid
     end
 
-    # it 'is valid with a name between 3 and 50 characters' do
-    # user = User.new(name: 'abc')
-    # expect(user).to be_valid
-    # end
-
-    # it 'is valid with a name between 3 and 50 characters' do
-    # user = User.new(name: 'a' * 50)
-    # expect(user).to be_valid
-    # end
-
     it 'is not valid with a name that already exists' do
       @user1 = User.create(name: 'abc')
       @user2 = User.new(name: 'abc')
