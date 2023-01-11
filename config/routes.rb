@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   root "users#current"
 
   resources :appointments, only: [:index, :create, :show, :update, :destroy]
-  resources :doctors, only: [:create, :destroy]
+  resources :doctors, only: [:index, :create, :show, :destroy]
 
   
 end
