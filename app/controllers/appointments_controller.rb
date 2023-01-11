@@ -1,35 +1,19 @@
 class AppointmentsController < ApplicationController
-  before_action :set_appointment, only: %i[show update destroy]
-
-  # GET users/:id/appointments
-  def index
-    # List the appointments for a specific user
-    @appointments = Appointment.all.where(user_id: params[:user_id])
-    render json: @appointments, status: :ok
-  end
+  # before_action :set_appointment, only: %i[show update destroy]
+  before_action :authenticate_user!
+  load_and_authorize_resource
 
   # GET /appointments
-  def show_all
+  def index
     # Lists all the appointments
-    @appointments = Appointment.all
+    # @appointments = Appointment.all
     render json: @appointments, status: :ok
   end
 
   # POST users/:id/appointments
   def create
     @appointment = Appointment.new(appointment_params)
-    @appointment.user_id = params[:user_id]
-    if @appointment.save
-      render json: @appointment, status: :created
-    else
-      render json: { error: 'Error creating appointment' }, status: :unprocessable_entity
-    end
-  end
-
-  # POST doctors/:id/appointments
-  def create_on_doctors
-    @appointment = Appointment.new(appointment_params)
-    @appointment.doctor_id = params[:id]
+    @appointment.user = current_user
     if @appointment.save
       render json: @appointment, status: :created
     else
@@ -52,9 +36,9 @@ class AppointmentsController < ApplicationController
     end
   end
 
-  # DELETE users/1/appointments/1
+  # DELETE /appointments/1
   def destroy
-    if params[:user_id].to_i == @appointment.user_id
+    if current_user == @appointment.user
       @appointment.destroy
       render json: { message: "Your appointment with doctor: #{@appointment.doctor.name} canceled!" }
     else
@@ -64,11 +48,11 @@ class AppointmentsController < ApplicationController
 
   private
 
-  def set_appointment
-    @appointment = Appointment.find(params[:id])
-  end
+  # def set_appointment
+  #   @appointment = Appointment.find(params[:id])
+  # end
 
   def appointment_params
-    params.require(:appointment).permit(:user_id, :date_of_appointment, :time_of_appointment, :description, :doctor_id)
+    params.require(:appointment).permit(:date_of_appointment, :time_of_appointment, :description, :doctor_id)
   end
 end
