@@ -3,11 +3,13 @@ class AppointmentsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
 
-  # GET /appointments
+  # GET /appointments  AppointmentSerializer
   def index
     # Lists all the appointments
     # @appointments = Appointment.all
-    render json: @appointments, status: :ok
+    render json: @appointments.map { |appo|
+                   AppointmentSerializer.new(appo).serializable_hash[:data][:attributes]
+                 }, status: :ok
   end
 
   # POST users/:id/appointments
@@ -15,7 +17,7 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.new(appointment_params)
     @appointment.user = current_user
     if @appointment.save
-      render json: @appointment, status: :created
+      render json: AppointmentSerializer.new(@appointments).serializable_hash[:data][:attributes], status: :created
     else
       render json: { error: 'Error creating appointment' }, status: :unprocessable_entity
     end
@@ -23,14 +25,14 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments/1
   def show
-    render json: @appointment, status: :ok
+    render json: AppointmentSerializer.new(@appointments).serializable_hash[:data][:attributes], status: :ok
   end
 
   # PATCH/PUT /appointments/1
   def update
     @appointment.update(appointment_params)
     if @appointment.save
-      render json: @appointment, status: :ok
+      render json: AppointmentSerializer.new(@appointments).serializable_hash[:data][:attributes], status: :ok
     else
       render json: { error: 'Error updating appointment' }, status: :unprocessable_entity
     end
@@ -38,12 +40,8 @@ class AppointmentsController < ApplicationController
 
   # DELETE /appointments/1
   def destroy
-    if current_user == @appointment.user
-      @appointment.destroy
-      render json: { message: "Your appointment with doctor: #{@appointment.doctor.name} canceled!" }
-    else
-      render json: { error: 'Only the Client  can cancel this appointment' }, status: :forbidden
-    end
+    @appointment.destroy
+    render json: { message: "Appointment #{@appointment.name} deleted!" }, status: :no_content
   end
 
   private
