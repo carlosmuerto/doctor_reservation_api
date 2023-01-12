@@ -7,21 +7,42 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-seeded_user = User.create(
-    name: "seeded User",
-    email: "user@seeded.com",
+seeded_user_a = User.create(
+    name: "seeded Alice",
+    email: "Alice@seeded.com",
     password: "seed123seed"
 )
+
+seeded_user_b = User.create(
+    name: "seeded Bob",
+    email: "Bob@seeded.com",
+    password: "seed123seed"
+)
+
+seeded_user_c = User.create(
+    name: "seeded Charle",
+    email: "Charle@seeded.com",
+    password: "seed123seed"
+)
+
+
 
 seeded_doctor = Doctor.create(
     name: "Seeded Doctor",
     specialization: "seeding",
     photo: "photoURL",
-    user: seeded_user
+    user: seeded_user_a
 )
 
 Appointment.create(
-    user: seeded_user,
+    user: seeded_user_b,
+    doctor: seeded_doctor,
+    description: "seeded description",
+    datetime_of_appointment: 10.days.from_now
+)
+
+Appointment.create(
+    user: seeded_user_c,
     doctor: seeded_doctor,
     description: "seeded description",
     datetime_of_appointment: 10.days.from_now
