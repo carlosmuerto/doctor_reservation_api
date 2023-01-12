@@ -4,12 +4,12 @@ class DoctorsController < ApplicationController
 
   def index
     # @doctors = Doctor.all
-    render json: @doctors, status: :ok
+    render json: @doctors.map { |doc| DoctorSerializer.new(doc).serializable_hash[:data][:attributes] }, status: :ok
   end
 
   def show
     # @doctor = Doctor.find(params[:id])
-    render json: @doctor
+    render json: DoctorSerializer.new(@doctor).serializable_hash[:data][:attributes], status: :ok
   end
 
   def create
@@ -35,19 +35,11 @@ class DoctorsController < ApplicationController
   def destroy
     @doctor.destroy
     render json: { message: "Doctor #{@doctor.name} deleted!" }, status: :ok
-    # @doctor = Doctor.find(params[:id])
-    # if params[:user_id].to_i == @doctor.user_id
-    #   @doctor.appointments.destroy_all
-    #   @doctor.destroy
-    #   render json: { message: "Doctor #{@doctor.name} deleted!" }, status: :ok
-    # else
-    #   render json: { error: 'Only the Owner can delete this doctor' }, status: :forbidden
-    # end
   end
 
   private
 
   def doctor_params
-    params.require(:doctor).permit(:user_id, :name, :specialization, :photo)
+    params.require(:doctor).permit(:name, :specialization, :photo)
   end
 end

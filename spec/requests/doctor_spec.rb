@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/BlockLength
 require 'swagger_helper'
 
 RSpec.describe 'doctor', type: :request do
@@ -50,7 +51,7 @@ RSpec.describe 'doctor', type: :request do
       end
     end
 
-    Post 'Create a Doctor' do
+    post 'Create a Doctor' do
       consumes 'application/json'
       produces 'application/json'
 
@@ -62,12 +63,52 @@ RSpec.describe 'doctor', type: :request do
 
       response 401, 'Unauthorized' do
         let(:Authorization) { '' }
+
+        let(:Doctor) do
+          {
+            doctor: {
+              name: 'RSpec Doctor',
+              specialization: 'RSpec',
+              photo: 'photoURL'
+            }
+          }
+        end
+
         run_test!
       end
 
-      response 200, 'OK' do
+      response 422, 'Unprocessable Entity' do
         let(:Authorization) do
           Devise::JWT::TestHelpers.auth_headers({}, test_person)['Authorization']
+        end
+
+        let(:Doctor) do
+          {
+            doctor: {
+              name: 'RSpec Doctor',
+              specialization: 'RSpec'
+            }
+          }
+        end
+
+        run_test!
+      end
+
+      response 201, 'Created' do
+        schema '$ref' => '#/components/schemas/Doctor'
+
+        let(:Authorization) do
+          Devise::JWT::TestHelpers.auth_headers({}, test_person)['Authorization']
+        end
+
+        let(:Doctor) do
+          {
+            doctor: {
+              name: 'RSpec Doctor',
+              specialization: 'RSpec',
+              photo: 'photoURL'
+            }
+          }
         end
 
         run_test!
@@ -75,3 +116,5 @@ RSpec.describe 'doctor', type: :request do
     end
   end
 end
+
+# rubocop:enable Metrics/BlockLength
