@@ -28,7 +28,7 @@ RSpec.describe 'doctor', type: :request do
   end
 
   path '/doctors' do
-    get 'Doctors' do
+    get 'Get Doctors List' do
       consumes 'application/json'
       produces 'application/json'
 
@@ -42,6 +42,30 @@ RSpec.describe 'doctor', type: :request do
       response 200, 'OK' do
         schema type: :array, items: { '$ref' => '#/components/schemas/Doctor' }
 
+        let(:Authorization) do
+          Devise::JWT::TestHelpers.auth_headers({}, test_person)['Authorization']
+        end
+
+        run_test!
+      end
+    end
+
+    Post 'Create a Doctor' do
+      consumes 'application/json'
+      produces 'application/json'
+
+      security [{ bearer_auth: [] }]
+
+      parameter name: :Doctor, in: :body, schema: {
+        '$ref' => '#/components/schemas/Doctor'
+      }
+
+      response 401, 'Unauthorized' do
+        let(:Authorization) { '' }
+        run_test!
+      end
+
+      response 200, 'OK' do
         let(:Authorization) do
           Devise::JWT::TestHelpers.auth_headers({}, test_person)['Authorization']
         end

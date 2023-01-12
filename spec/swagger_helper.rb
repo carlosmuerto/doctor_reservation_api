@@ -44,7 +44,8 @@ RSpec.configure do |config|
               specialization: { type: :string, example: 'specialization' },
               photo: { type: :string, example: '<photoURL>' },
               user_id: { type: :integer, example: 2 }
-            }
+            },
+            required: %w[name specialization photo user_id]
           },
           status: {
             type: :object,
