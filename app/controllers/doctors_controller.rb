@@ -34,7 +34,7 @@ class DoctorsController < ApplicationController
 
   def destroy
     @doctor.destroy
-    render json: { message: "Doctor #{@doctor.name} deleted!" }, status: :ok
+    render json: { message: "Doctor #{@doctor.name} deleted!" }, status: :no_content
   end
 
   private
