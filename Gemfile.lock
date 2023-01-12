@@ -296,7 +296,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.4)
-  rspec-rails
+  rspec-rails (~> 6.0.0.rc1)
   rswag
   rubocop
   solargraph
