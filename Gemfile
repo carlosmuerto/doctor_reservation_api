@@ -12,6 +12,9 @@ gem 'devise-jwt'
 # generate API Documentation from test
 gem 'rswag'
 
+# handle authorization
+gem 'cancancan'
+
 # handle json reponse
 gem 'fast_jsonapi'
 
