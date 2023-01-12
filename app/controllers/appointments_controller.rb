@@ -41,7 +41,7 @@ class AppointmentsController < ApplicationController
   # DELETE /appointments/1
   def destroy
     @appointment.destroy
-    render json: { message: "Appointment #{@appointment.name} deleted!" }, status: :no_content
+    render json: { message: 'Appointment deleted!' }, status: :no_content
   end
 
   private

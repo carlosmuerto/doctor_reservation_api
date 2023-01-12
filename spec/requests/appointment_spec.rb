@@ -115,6 +115,68 @@ RSpec.describe 'appointment', type: :request do
       end
     end
   end
+
+  ## ------------
+
+  path '/appointments/{id}' do
+    get 'get a appointment' do
+      consumes 'application/json'
+      produces 'application/json'
+
+      security [{ bearer_auth: [] }]
+
+      parameter name: :id, in: :path, type: :integer
+
+      response 401, 'Unauthorized' do
+        let(:Authorization) { '' }
+
+        let(:id) { test_appointment.id }
+
+        run_test!
+      end
+
+      response 200, 'OK' do
+        schema '$ref' => '#/components/schemas/Appointment'
+
+        let(:id) { test_appointment.id }
+
+        let(:Authorization) do
+          Devise::JWT::TestHelpers.auth_headers({}, test_person)['Authorization']
+        end
+
+        run_test!
+      end
+    end
+
+    delete 'delete a Appointment' do
+      consumes 'application/json'
+      produces 'application/json'
+
+      security [{ bearer_auth: [] }]
+
+      parameter name: :id, in: :path, type: :integer
+
+      response 401, 'Unauthorized' do
+        let(:Authorization) { '' }
+
+        let(:id) { test_appointment.id }
+
+        run_test!
+      end
+
+      response 204, 'No Content' do
+        let(:id) { test_appointment.id }
+
+        let(:Authorization) do
+          Devise::JWT::TestHelpers.auth_headers({}, test_person)['Authorization']
+        end
+
+        run_test!
+      end
+    end
+  end
+
+  ## ------------
 end
 
 # rubocop:enable Metrics/BlockLength
