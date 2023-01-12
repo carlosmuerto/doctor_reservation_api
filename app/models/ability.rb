@@ -7,7 +7,7 @@ class Ability
 
     return unless user.present?
 
-    can(%i[read create destroy], Appointment, user:)
+    can(%i[read create update destroy], Appointment, user:)
     can(%i[create destroy], Doctor, user:)
     can(%i[read], Doctor)
 
