@@ -5,7 +5,7 @@ RSpec.describe Appointment, type: :model do
     @user = User.create(name: 'John Doe')
     @doctor = Doctor.create(name: 'Dr. John Doe', specialization: 'Pediatrics', photo: 'https://www.google.com',
                             user_id: @user.id)
-    @appointment = Appointment.create(datetime_of_appointment: '2024, 1, 1, 10, 00', description: 'Checkup',
+    @appointment = Appointment.create(datetime_of_appointment: 1.years.from_now, description: 'Checkup',
                                       user_id: @user.id, doctor_id: @doctor.id)
   end
 
@@ -60,7 +60,7 @@ RSpec.describe Appointment, type: :model do
 
     it 'is not valid with a date_of_appointment in the past' do
       appointment = Appointment.new(user: @user, doctor: @doctor, description: 'abc',
-                                    datetime_of_appointment: '2020-01-11 00:20:20.000000000 +0000')
+                                    datetime_of_appointment: -1.years.from_now)
       expect(appointment).to_not be_valid
     end
   end

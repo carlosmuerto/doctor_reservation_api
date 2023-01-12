@@ -53,7 +53,6 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
 
   # handle unit testing
-  gem 'capybara'
   gem 'rspec-rails', '~> 6.0.0.rc1'
 end
 
