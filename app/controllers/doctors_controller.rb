@@ -1,12 +1,14 @@
 class DoctorsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @doctors = Doctor.all
-    render json: @doctors, status: :ok
+    render json: @doctors.map { |doc| DoctorSerializer.new(doc).serializable_hash[:data][:attributes] }, status: :ok
   end
 
   def show
     @doctor = Doctor.find(params[:id])
-    render json: @doctor
+    render json: DoctorSerializer.new(@doctor).serializable_hash[:data][:attributes], status: :ok
   end
 
   def create
@@ -14,7 +16,7 @@ class DoctorsController < ApplicationController
     @doctor = Doctor.new(doctor_params)
     @doctor.user_id = params[:user_id]
     if @doctor.save
-      render json: @doctor, status: :created
+      render json: DoctorSerializer.new(@doctor).serializable_hash[:data][:attributes], status: :created
     else
       render json: { error: 'Error creating doctor' }, status: :unprocessable_entity
     end
@@ -23,7 +25,7 @@ class DoctorsController < ApplicationController
   def update
     @doctor = Doctor.find(params[:id])
     if @doctor.update(doctor_params)
-      render json: @doctor
+      render json: DoctorSerializer.new(@doctor).serializable_hash[:data][:attributes], status: :ok
     else
       render json: @doctor.errors, status: :unprocessable_entity
     end

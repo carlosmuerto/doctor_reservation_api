@@ -36,6 +36,16 @@ RSpec.configure do |config|
               role: { type: :string, example: 'user' }
             }
           },
+          Doctor: {
+            type: :object,
+            propeties: {
+              id: { type: :integer, example: 2 },
+              name: { type: :string, example: 'Scott Wells' },
+              specialization: { type: :string, example: 'specialization' },
+              photo: { type: :string, example: '<photoURL>' },
+              user_id: { type: :integer, example: 2 }
+            }
+          },
           status: {
             type: :object,
             properties: {
