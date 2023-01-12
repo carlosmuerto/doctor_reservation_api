@@ -47,6 +47,17 @@ RSpec.configure do |config|
             },
             required: %w[name specialization photo]
           },
+          Appointment: {
+            type: :object,
+            propeties: {
+              id: { type: :integer, example: 2 },
+              doctor_id: { type: :integer, example: 2 },
+              description: { type: :string, example: 'Scott Wells' },
+              datetime_of_appointment: { type: :string, example: 'specialization' },
+              created_at: { type: :string, example: '<photoURL>' }
+            },
+            required: %w[doctor_id description datetime_of_appointment]
+          },
           status: {
             type: :object,
             properties: {

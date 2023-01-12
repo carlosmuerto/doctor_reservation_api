@@ -17,7 +17,7 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.new(appointment_params)
     @appointment.user = current_user
     if @appointment.save
-      render json: AppointmentSerializer.new(@appointments).serializable_hash[:data][:attributes], status: :created
+      render json: AppointmentSerializer.new(@appointment).serializable_hash[:data][:attributes], status: :created
     else
       render json: { error: 'Error creating appointment' }, status: :unprocessable_entity
     end
@@ -25,14 +25,14 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments/1
   def show
-    render json: AppointmentSerializer.new(@appointments).serializable_hash[:data][:attributes], status: :ok
+    render json: AppointmentSerializer.new(@appointment).serializable_hash[:data][:attributes], status: :ok
   end
 
   # PATCH/PUT /appointments/1
   def update
     @appointment.update(appointment_params)
     if @appointment.save
-      render json: AppointmentSerializer.new(@appointments).serializable_hash[:data][:attributes], status: :ok
+      render json: AppointmentSerializer.new(@appointment).serializable_hash[:data][:attributes], status: :ok
     else
       render json: { error: 'Error updating appointment' }, status: :unprocessable_entity
     end
@@ -51,6 +51,6 @@ class AppointmentsController < ApplicationController
   # end
 
   def appointment_params
-    params.require(:appointment).permit(:date_of_appointment, :time_of_appointment, :description, :doctor_id)
+    params.require(:appointment).permit(:datetime_of_appointment, :description, :doctor_id)
   end
 end
