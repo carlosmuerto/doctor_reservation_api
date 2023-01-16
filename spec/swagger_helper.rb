@@ -36,6 +36,26 @@ RSpec.configure do |config|
               role: { type: :string, example: 'user' }
             }
           },
+          Doctor: {
+            type: :object,
+            properties: {
+              id: { type: :integer, example: 2 },
+              name: { type: :string, example: 'Scott doctor' },
+              specialization: { type: :string, example: 'specialization' },
+              photo: { type: :string, example: 'https://example.com/photo.jpg' },
+              user_id: { type: :integer, example: 2 }
+            }
+          },
+          Appointment: {
+            type: :object,
+            properties: {
+              id: { type: :integer, example: 2 },
+              doctor_id: { type: :integer, example: 2 },
+              description: { type: :string, example: 'Scott Wells' },
+              datetime_of_appointment: { type: :string, example: '2023-01-21T22:37:47.895Z' },
+              created_at: { type: :string, example: '2023-01-11T22:37:47.904Z' }
+            }
+          },
           status: {
             type: :object,
             properties: {
@@ -47,7 +67,7 @@ RSpec.configure do |config|
             type: :object,
             properties: {
               type: :array,
-              items: { type: :string }
+              items: { type: :string, example: 'error message.' }
             }
           }
         }
