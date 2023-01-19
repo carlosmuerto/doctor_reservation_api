@@ -113,7 +113,10 @@ jobs:
           DATABASE_PASSWORD: ${{ matrix.database-password }}
           DATABASE_HOST: ${{ matrix.database-host }}
           DATABASE_PORT: ${{ matrix.database-port }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }} 
         run: bundle exec rails db:setup
 
       - name: RSpec Report
+        env:
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }} 
         run: bundle exec rspec --force-color --format documentation
