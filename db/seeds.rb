@@ -31,70 +31,70 @@ seeded_user_c = User.create(
 seeded_doctor_a = Doctor.create(
     name: "Dr. Edward George Armstrong",
     specialization: "Allergist",
-    photo: "photoURL",
+    photo: "https://t3.ftcdn.net/jpg/02/95/51/80/360_F_295518052_aO5d9CqRhPnjlNDTRDjKLZHNftqfsxzI.jpg",
     user: seeded_user_a
 )
 
 seeded_doctor_b = Doctor.create(
     name: "Dr. Charles Burton",
     specialization: "Anesthesiologist",
-    photo: "photoURL",
+    photo: "https://www.eatthis.com/wp-content/uploads/sites/4/2020/12/serious-doctor-hospital.jpg?quality=82&strip=1",
     user: seeded_user_a
 )
 
 seeded_doctor_c = Doctor.create(
     name: "Dr. Mark Hall",
     specialization: "Pediatrician",
-    photo: "photoURL",
+    photo: "https://st.depositphotos.com/1258191/3252/i/600/depositphotos_32524605-stock-photo-portrait-of-a-handsome-doctor.jpg",
     user: seeded_user_a
 )
 
 seeded_doctor_d = Doctor.create(
     name: "Dr. Peter Leavitt",
     specialization: "Cardiologist",
-    photo: "photoURL",
+    photo: "https://t4.ftcdn.net/jpg/03/16/76/11/360_F_316761139_yVmLRT0AVwpZwOTgpmfrdIKrtFfg0bop.jpg",
     user: seeded_user_b
 )
 
 seeded_doctor_e = Doctor.create(
     name: "Dr. Jeremy Stone",
     specialization: "Oncologist",
-    photo: "photoURL",
+    photo: "https://t4.ftcdn.net/jpg/03/20/52/31/360_F_320523164_tx7Rdd7I2XDTvvKfz2oRuRpKOPE5z0ni.jpg",
     user: seeded_user_b
 )
 
 seeded_doctor_f = Doctor.create(
     name: "Dr. Martin Arrowsmith",
     specialization: "Gastroenterologist",
-    photo: "photoURL",
+    photo: "https://media.istockphoto.com/id/177373093/photo/indian-male-doctor.jpg?s=612x612&w=0&k=20&c=5FkfKdCYERkAg65cQtdqeO_D0JMv6vrEdPw3mX1Lkfg=",
     user: seeded_user_b
 )
 
 seeded_doctor_g = Doctor.create(
     name: "	Dr. Stephen Maturin",
     specialization: "Obstetrician",
-    photo: "photoURL",
+    photo: "https://img.freepik.com/free-photo/attractive-young-male-nutriologist-lab-coat-smiling-against-white-background_662251-2960.jpg?w=2000",
     user: seeded_user_b
 )
 
 seeded_doctor_h = Doctor.create(
     name: "Dr. Andrew Manson",
     specialization: "Ophthalmologist",
-    photo: "photoURL",
+    photo: "https://t4.ftcdn.net/jpg/02/60/04/09/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5.jpg",
     user: seeded_user_c
 )
 
 seeded_doctor_i = Doctor.create(
     name: "Dr. Jack Stapleton",
     specialization: "Psychiatrist",
-    photo: "photoURL",
+    photo: "https://familydoctor.org/wp-content/uploads/2018/02/41808433_l.jpg",
     user: seeded_user_c
 )
 
 seeded_doctor_j = Doctor.create(
     name: "Dr. Sam Weizak",
     specialization: "Dermatologist",
-    photo: "photoURL",
+    photo: "https://st2.depositphotos.com/4431055/11852/i/600/depositphotos_118522306-stock-photo-handsome-doctor-portrait.jpg",
     user: seeded_user_c
 )
 
@@ -103,34 +103,34 @@ seeded_doctor_j = Doctor.create(
 Appointment.create(
     user: seeded_user_b,
     doctor: seeded_doctor_a,
-    description: "seeded description",
+    description: "Looking information about some allergies",
     datetime_of_appointment: 10.days.from_now
 )
 
 Appointment.create(
     user: seeded_user_b,
     doctor: seeded_doctor_b,
-    description: "seeded description",
+    description: "Needs Anesthesia for a surgery",
     datetime_of_appointment: 15.days.from_now
 )
 
 Appointment.create(
     user: seeded_user_a,
     doctor: seeded_doctor_h,
-    description: "seeded description",
+    description: "Needs a new pair of glasses",
     datetime_of_appointment: 10.days.from_now
 )
 
 Appointment.create(
     user: seeded_user_a,
     doctor: seeded_doctor_e,
-    description: "seeded description",
+    description: "Control Appointment",
     datetime_of_appointment: 15.days.from_now
 )
 
 Appointment.create(
     user: seeded_user_c,
     doctor: seeded_doctor_f,
-    description: "seeded description",
+    description: "Has been feeling pain in the stomach",
     datetime_of_appointment: 10.days.from_now
 )
