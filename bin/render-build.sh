@@ -3,5 +3,5 @@
 set -o errexit
 
 bundle install
-# bundle exec rails db:migrate
+bundle exec rails db:reset
 # bundle exec rake db:seed
