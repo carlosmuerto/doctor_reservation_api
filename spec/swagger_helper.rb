@@ -42,7 +42,7 @@ RSpec.configure do |config|
               id: { type: :integer, example: 2 },
               name: { type: :string, example: 'Scott doctor' },
               specialization: { type: :string, example: 'specialization' },
-              photo: { type: :string, example: 'https://example.com/photo.jpg' },
+              photo_dir: { type: :string, example: 'asset/photo.jpg' },
               user_id: { type: :integer, example: 2 }
             }
           },

@@ -3,7 +3,21 @@ require 'rails_helper'
 RSpec.describe Doctor, type: :model do
   before(:each) do
     @user = User.create(name: 'Jane')
-    @doctor = Doctor.create(user: @user, user_id: '1', name: 'Dr. John Doe', specialization: 'Pediatrics', photo: 'https://example.com/photo.jpg')
+
+    @doctor = Doctor.new(
+      user: @user,
+      user_id: '1',
+      name: 'Dr. John Doe',
+      specialization: 'Pediatrics'
+    )
+
+    @doctor.photo.attach(
+      io: File.open(Rails.root.join('spec', 'support', 'test_doc.jpg')),
+      filename: 'soy.jpeg',
+      content_type: 'image/jpeg'
+    )
+
+    @doctor.save
   end
 
   describe 'associations' do
