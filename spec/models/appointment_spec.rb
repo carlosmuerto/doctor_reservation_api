@@ -3,10 +3,26 @@ require 'rails_helper'
 RSpec.describe Appointment, type: :model do
   before(:each) do
     @user = User.create(name: 'John Doe')
-    @doctor = Doctor.create(name: 'Dr. John Doe', specialization: 'Pediatrics', photo: 'https://www.google.com',
-                            user_id: @user.id)
-    @appointment = Appointment.create(datetime_of_appointment: 1.years.from_now, description: 'Checkup',
-                                      user_id: @user.id, doctor_id: @doctor.id)
+    @doctor = Doctor.new(
+      name: 'Dr. John Doe',
+      specialization: 'Pediatrics',
+      user_id: @user.id
+    )
+
+    @doctor.photo.attach(
+      io: File.open(Rails.root.join('spec', 'support', 'test_doc.jpg')),
+      filename: 'soy.jpeg',
+      content_type: 'image/jpeg'
+    )
+
+    @doctor.save
+
+    @appointment = Appointment.create(
+      datetime_of_appointment: 1.years.from_now,
+      description: 'Checkup',
+      user_id: @user.id,
+      doctor_id: @doctor.id
+    )
   end
 
   describe 'associations' do

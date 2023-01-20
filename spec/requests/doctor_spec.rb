@@ -11,21 +11,39 @@ RSpec.describe 'doctor', type: :request do
   end
 
   let!(:test_doctor_a) do
-    Doctor.create(
+    doc = Doctor.new(
       name: 'RSpec Doctor A',
       specialization: 'seeding',
-      photo: 'photoURL',
       user: test_person
     )
+
+    doc.photo.attach(
+      io: File.open(Rails.root.join('spec', 'support', 'test_doc.jpg')),
+      filename: 'soy.jpeg',
+      content_type: 'image/jpeg'
+    )
+
+    doc.save
+
+    doc
   end
 
   let!(:test_doctor_b) do
-    Doctor.create(
+    doc = Doctor.new(
       name: 'RSpec Doctor B',
       specialization: 'seeding',
-      photo: 'photoURL',
       user: test_person
     )
+
+    doc.photo.attach(
+      io: File.open(Rails.root.join('spec', 'support', 'test_doc.jpg')),
+      filename: 'soy.jpeg',
+      content_type: 'image/jpeg'
+    )
+
+    doc.save
+
+    doc
   end
 
   path '/doctors' do
@@ -53,12 +71,19 @@ RSpec.describe 'doctor', type: :request do
 
     post 'Create a Doctor' do
       consumes 'application/json'
-      produces 'application/json'
 
       security [{ bearer_auth: [] }]
 
       parameter name: :Doctor, in: :body, schema: {
-        '$ref' => '#/components/schemas/Doctor'
+        type: :object,
+        properties: {
+          name: { type: :string, example: 'Scott doctor' },
+          specialization: { type: :string, example: 'specialization' }
+        },
+        required: %w[
+          name
+          specialization
+        ]
       }
 
       response 401, 'Unauthorized' do
@@ -69,7 +94,10 @@ RSpec.describe 'doctor', type: :request do
             doctor: {
               name: 'RSpec Doctor',
               specialization: 'RSpec',
-              photo: 'photoURL'
+              photo: fixture_file_upload(
+                Rails.root.join('spec', 'support', 'test_doc.jpg'),
+                'image/jpg'
+              )
             }
           }
         end
@@ -85,8 +113,7 @@ RSpec.describe 'doctor', type: :request do
         let(:Doctor) do
           {
             doctor: {
-              name: 'RSpec Doctor',
-              specialization: 'RSpec'
+              name: 'RSpec Doctor'
             }
           }
         end
@@ -105,8 +132,7 @@ RSpec.describe 'doctor', type: :request do
           {
             doctor: {
               name: 'RSpec Doctor',
-              specialization: 'RSpec',
-              photo: 'photoURL'
+              specialization: 'RSpec'
             }
           }
         end
