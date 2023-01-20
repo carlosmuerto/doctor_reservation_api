@@ -14,7 +14,6 @@ RSpec.describe 'appointment', type: :request do
     Doctor.create(
       name: 'RSpec Doctor A',
       specialization: 'seeding',
-      photo: 'photoURL',
       user: test_person
     )
   end
@@ -58,7 +57,17 @@ RSpec.describe 'appointment', type: :request do
       security [{ bearer_auth: [] }]
 
       parameter name: :Appointment, in: :body, schema: {
-        '$ref' => '#/components/schemas/Appointment'
+        type: :object,
+        properties: {
+          doctor_id: { type: :integer, example: 2 },
+          description: { type: :string, example: 'Scott Wells' },
+          datetime_of_appointment: { type: :string, example: '2023-01-21T22:37:47.895Z' }
+        },
+        required: %w[
+          doctor_id
+          description
+          datetime_of_appointment
+        ]
       }
 
       response 401, 'Unauthorized' do

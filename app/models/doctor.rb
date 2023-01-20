@@ -4,7 +4,11 @@ class Doctor < ApplicationRecord
   has_many :appointments
 
   def photo_dir
-    Rails.application.routes.url_helpers.rails_blob_path(photo, only_path: true)
+    if photo.attached?
+      Rails.application.routes.url_helpers.rails_blob_path(photo, only_path: true)
+    else
+      ''
+    end
   end
 
   # validations

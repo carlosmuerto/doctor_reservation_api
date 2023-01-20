@@ -42,14 +42,9 @@ RSpec.configure do |config|
               id: { type: :integer, example: 2 },
               name: { type: :string, example: 'Scott doctor' },
               specialization: { type: :string, example: 'specialization' },
-              photo: { type: :string, example: 'https://example.com/photo.jpg' },
+              photo_dir: { type: :string, example: 'asset/photo.jpg' },
               user_id: { type: :integer, example: 2 }
-            },
-            required: %w[
-              name
-              specialization
-              photo
-            ]
+            }
           },
           Appointment: {
             type: :object,
@@ -59,12 +54,7 @@ RSpec.configure do |config|
               description: { type: :string, example: 'Scott Wells' },
               datetime_of_appointment: { type: :string, example: '2023-01-21T22:37:47.895Z' },
               created_at: { type: :string, example: '2023-01-11T22:37:47.904Z' }
-            },
-            required: %w[
-              doctor_id
-              description
-              datetime_of_appointment
-            ]
+            }
           },
           status: {
             type: :object,
