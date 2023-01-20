@@ -16,6 +16,8 @@ class DoctorsController < ApplicationController
     # Only the admin user should create the user
     @doctor = Doctor.new(doctor_params)
     @doctor.user = current_user
+    photo = params.require(:doctor)[:photo]
+    @doctor.photo.attach(photo) if photo
     if @doctor.save
       render json: DoctorSerializer.new(@doctor).serializable_hash[:data][:attributes], status: :created
     else
